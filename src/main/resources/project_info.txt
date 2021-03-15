@@ -1,0 +1,4 @@
+${name}
+java version: ${java.version}
+encoding: ${project.build.sourceEncoding}
+ms sql server version: ${sqlserver-connector.version}

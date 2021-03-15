@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/default.xml" />
+
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="LOG_FILE" value="${LOG_PATH}/integration"/>
+    <property name="CONSOLE_LOG_PATTERN" value="%date [%thread] %-5level %logger{10} - %message%n"/>
+    <property name="FILE_LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger - %message%n"/>
+
+    <logger name="com.oscarcpz.maven" level="DEBUG"/>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.security" level="ERROR"/>
+    <logger name="com.zaxxer.hikari" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.jboss" level="ERROR"/>
+
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${LOG_FILE}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <maxHistory>20</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="FILE_APPENDER" />
+        <appender-ref ref="CONSOLE_APPENDER" />
+    </root>
+
+</configuration>
